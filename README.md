@@ -41,7 +41,7 @@
                                   'auto:split'}
                   }
 
-  [Click for example files](https://github.com/savithruml/netronome-agilio-vrouter/blob/3.1.2/testbed)
+  [Click for example files](https://github.com/netronome-support/vRouter/tree/master/testbed)
 
 
 * Install contrail-install-packages on remaining nodes
@@ -66,7 +66,7 @@
 
       fab install_ns_agilio_nic:/tmp/ns-agilio-vrouter-depends-packages_x.x.x.x-xxx_amd64.deb
 
-* Install Contrail packages on all nodes
+* Install Contrail packages
 
       fab install_contrail
 
@@ -80,12 +80,14 @@
 
 
 
-## On Netronome compute node
+## On all nodes 
 
 * Verify if provisioning was successfully
 
       contrail-status
       /opt/netronome/libexec/nfp-vrouter-status -r
+
+
 
 
 
