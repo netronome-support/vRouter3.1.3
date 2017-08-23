@@ -1,10 +1,6 @@
 # Netronome vRouter Installation Guide (Fresh Install)
 
-
-## Contrail-Netronome Architecture
-  ![architecture](images/contrail_agilio_architecture.png)
-
-# Pre-Requisites
+## Pre-Requisites
 
 * Ubuntu 14.04.4 (3.13.0-100 Errata 47 patched kernel)
 * Contrail-Cloud 3.1.2.0-65 (OpenStack Kilo/Mitaka)
@@ -50,40 +46,32 @@
 
 * Install contrail-install-packages on remaining nodes
 
-cd /opt/contrail/utils
-fab install_pkg_all:/tmp/contrail-install-packages-x.x.x.x-xxx~openstack_version_all.deb
+      cd /opt/contrail/utils
+      fab install_pkg_all:/tmp/contrail-install-packages-x.x.x.x-xxx~openstack_version_all.deb
          
 * Upgrade all nodes to recommended kernel
-fab upgrade_kernel_all
+      fab upgrade_kernel_all
 
 
 * Change the media configuration of the SmartNIC if you are using breakout cables (4 x 10GbE ---> 1 X 40GbE)
          
          This should create four NFP interfaces: nfp_p0, nfp_p1, nfp_p2, nfp_p3
 
-         (compute-node)# /opt/netronome/bin/nfp-media --set-media=phy0=4x10G
-         (compute-node)# service ns-core-nic.autorun clean
-         (compute-node)# reboot
+      /opt/netronome/bin/nfp-media --set-media=phy0=4x10G
+      service ns-core-nic.autorun clean
+      reboot
          
 * Install ns-agilio-vrouter-depends-packages
-fab install_ns_agilio_nic:/tmp/ns-agilio-vrouter-depends-packages_x.x.x.x-xxx_amd64.deb
+      fab install_ns_agilio_nic:/tmp/ns-agilio-vrouter-depends-packages_x.x.x.x-xxx_amd64.deb
 
 * Install Contrail packages on all nodes
-fab install_contrail
+      fab install_contrail
 
 * Setup control_data interfaces
-fab setup_interface
+      fab setup_interface
 
 * Provision the cluster
-fab setup_all
-
-
-
-
-         (controller-node)# cd /opt/contrail/utils
-         (controller-node)# fab install_contrail
-         (controller-node)# fab setup_interface (Verify if all nodes can talk with each other on Control/Data interface)
-         (controller-node)# fab setup_all
+      fab setup_all
 
 ## On Netronome compute node
 
@@ -183,3 +171,8 @@ NOTE: This guide assumes that you have already inserted the Netronome NIC on the
           (controller-node)# ssh root@<new-compute-ip> "cd /opt/contrail/contrail_install_repo; dpkg-scanpackages . /dev/null | gzip -9c > Packages.gz; apt-get update"
           
           (controller-node)# fab add_vrouter_node:root@<new-compute-ip>
+
+
+## Contrail-Netronome Architecture
+  ![architecture](images/contrail_agilio_architecture.png)
+
