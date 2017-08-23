@@ -78,7 +78,6 @@
     sed -i '1s/^.//' /etc/apt/sources.list
     apt-get update
 
-
 * Setup control_data interfaces
 
       fab setup_interface
