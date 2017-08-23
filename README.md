@@ -76,8 +76,8 @@
       sed -i '1s/^/#/' /etc/apt/sources.list
       apt-get update
       DEBIAN_FRONTEND=noninteractive apt-get -y --force-yes --allow-unauthenticated install default-jre-headless
-     sed -i '1s/^.//' /etc/apt/sources.list
-     apt-get update
+      sed -i '1s/^.//' /etc/apt/sources.list
+      apt-get update
 
 * Setup control_data interfaces
 
