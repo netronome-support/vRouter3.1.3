@@ -70,7 +70,8 @@
 
       fab install_contrail
 
-     #java fix
+     *java fix
+
      #!/bin/bash
      sed -i '1s/^/#/' /etc/apt/sources.list
      apt-get update
