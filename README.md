@@ -1,8 +1,8 @@
-# Contrail-Netronome Architecture
+# Netronome vRouter Installation Guide (Fresh Install)
+
+
+## Contrail-Netronome Architecture
   ![architecture](images/contrail_agilio_architecture.png)
-  
-# Lab Setup
-  ![lab setup](images/lab_setup.png)
 
 # Pre-Requisites
 
@@ -10,33 +10,20 @@
 * Contrail-Cloud 3.1.2.0-65 (OpenStack Kilo/Mitaka)
 * Agilio vRouter 3.1.0.0-124
 
-# Netronome SmartNic Install Guide (Fresh Install)
-
-NOTE: This guide assumes that you have already inserted the Netronome NIC on the server. For a list of supported servers, refer this [document](https://github.com/savithruml/netronome-agilio-vrouter/blob/3.1.2/list-of-supported-servers.pdf)
-
 ## On all nodes
 * Install Ubuntu 14.04.4 on all the nodes in the setup
-
-* Download & install Contrail packages on the nodes
-
-         (all-nodes)# dpkg -i contrail-install-packages_3.1.2.0-65~mitaka_all.deb
-         (all-nodes)# /opt/contrail/contrail_packages/setup.sh
-         (all-nodes)# apt-get update
-
-* Download Netronome (Agilio vRouter) package & copy to all nodes
-
-         (all-nodes)# tar -xvf ns-agilio-vrouter-release_3.1.0.0-124.tgz 
-         (all-nodes)# cd ns-agilio-vrouter-release_3.1.0.0-124/
-         (all-nodes)# cp ns-agilio-vrouter-depends-packages_3.1.0.0-124_amd64.deb /opt/contrail/contrail_install_repo/
-         (all-nodes)# cd /opt/contrail/contrail_install_repo/
-         (all-nodes)# dpkg-scanpackages . /dev/null | gzip -9c > Packages.gz
-         (all-nodes)# apt-get update
          
 ## On Controller node
 
+* Download & install Contrail packages
+
+dpkg -i contrail-install-packages_3.1.*.*_all.deb
+cd /opt/contrail/contrail_packages && ./setup.sh
+apt-get update
+
 * Populate testbed with relevant information
 
-         (controller-node)# vim /opt/contrail/utils/fabfile/testbeds/testbed.py
+         (controller-node)# cat /opt/contrail/utils/fabfile/testbeds/testbed.py
          
                   bond= {
                       compute1 : { 'name': 'bond0', 'member': ['nfp_p0','nfp_p1','nfp_p2','nfp_p3'], 'mode': '802.3ad',    
@@ -60,11 +47,16 @@ NOTE: This guide assumes that you have already inserted the Netronome NIC on the
 
   [Click for example files](https://github.com/savithruml/netronome-agilio-vrouter/blob/3.1.2/testbed)
 
-* Bring up the Netronome SmartNIC
 
-         (controller-node)# cd /opt/contrail/utils/
-         (controller-node)# fab install_ns_agilio_nic
+* Install contrail-install-packages on remaining nodes
+
+cd /opt/contrail/utils
+fab install_pkg_all:/tmp/contrail-install-packages-x.x.x.x-xxx~openstack_version_all.deb
          
+* Upgrade all nodes to recommended kernel
+fab upgrade_kernel_all
+
+
 * Change the media configuration of the SmartNIC if you are using breakout cables (4 x 10GbE ---> 1 X 40GbE)
          
          This should create four NFP interfaces: nfp_p0, nfp_p1, nfp_p2, nfp_p3
@@ -73,7 +65,20 @@ NOTE: This guide assumes that you have already inserted the Netronome NIC on the
          (compute-node)# service ns-core-nic.autorun clean
          (compute-node)# reboot
          
-* Install Contrail
+* Install ns-agilio-vrouter-depends-packages
+fab install_ns_agilio_nic:/tmp/ns-agilio-vrouter-depends-packages_x.x.x.x-xxx_amd64.deb
+
+* Install Contrail packages on all nodes
+fab install_contrail
+
+* Setup control_data interfaces
+fab setup_interface
+
+* Provision the cluster
+fab setup_all
+
+
+
 
          (controller-node)# cd /opt/contrail/utils
          (controller-node)# fab install_contrail
@@ -84,18 +89,12 @@ NOTE: This guide assumes that you have already inserted the Netronome NIC on the
 
 * Verify if provisioning was successfully
 
-         (compute-nodes)# contrail-status
-         (compute-nodes)# /opt/netronome/libexec/nfp-vrouter-status -r
+contrail-status
+/opt/netronome/libexec/nfp-vrouter-status -r
 
-  ![Agilio-vRouter](images/agilio_vrouter.png)
 
-* Create VirtIO flavors
 
-  NOTE: Do this only once
 
-         (compute-node)# cd /ns-agilio-vrouter-release_3.1.0.0-124/ns-agilio-vrouter_3.1.0.0-124/opt/netronome/openstack
-         (compute-node)# ./make_virtio_flavors.sh <controller-ip-address>
-         
 # Netronome SmartNic Install Guide (Existing Setup)
 
 NOTE: This guide assumes that you have already inserted the Netronome NIC on the server. For a list of supported servers, refer this [document](https://github.com/savithruml/netronome-agilio-vrouter/blob/3.1.2/list-of-supported-servers.pdf)
