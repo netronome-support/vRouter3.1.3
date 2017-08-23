@@ -89,8 +89,8 @@ fab setup_all
 
 * Verify if provisioning was successfully
 
-contrail-status
-/opt/netronome/libexec/nfp-vrouter-status -r
+      contrail-status
+      /opt/netronome/libexec/nfp-vrouter-status -r
 
 
 
