@@ -70,23 +70,24 @@
 
       fab install_contrail
 
-     * java fix
+     #java fix
+     #!/bin/bash
+     sed -i '1s/^/#/' /etc/apt/sources.list
+     apt-get update
+     DEBIAN_FRONTEND=noninteractive apt-get -y --force-yes --allow-unauthenticated install default-jre-headless
+    sed -i '1s/^.//' /etc/apt/sources.list
+    apt-get update
 
-      #!/bin/bash
-      sed -i '1s/^/#/' /etc/apt/sources.list
-      apt-get update
-      DEBIAN_FRONTEND=noninteractive apt-get -y --force-yes --allow-unauthenticated install default-jre-headless
-      sed -i '1s/^.//' /etc/apt/sources.list
-      apt-get update
 
 * Setup control_data interfaces
 
       fab setup_interface
 
+NOTE: After this step you should have communication on the underlay network 
+
 * Provision the cluster
 
       fab setup_all
-
 
 
 ## On all nodes 
@@ -98,7 +99,7 @@
 
 
 
-
+===============================================================
 
 
 # Netronome SmartNic Install Guide (Existing Setup)
