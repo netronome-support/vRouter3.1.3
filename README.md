@@ -17,9 +17,9 @@
 
 * Download & install Contrail packages
 
-dpkg -i contrail-install-packages_3.1.*.*_all.deb
-cd /opt/contrail/contrail_packages && ./setup.sh
-apt-get update
+	dpkg -i contrail-install-packages_3.1.*.*_all.deb
+	cd /opt/contrail/contrail_packages && ./setup.sh
+	apt-get update
 
 * Populate testbed with relevant information
 
