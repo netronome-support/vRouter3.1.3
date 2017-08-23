@@ -13,9 +13,9 @@
 
 * Download & install Contrail packages
 
-	dpkg -i contrail-install-packages_3.1.*.*_all.deb
-	cd /opt/contrail/contrail_packages && ./setup.sh
-	apt-get update
+      dpkg -i contrail-install-packages_3.1.*.*_all.deb
+      cd /opt/contrail/contrail_packages && ./setup.sh
+      apt-get update
 
 * Populate testbed with relevant information
 
@@ -50,6 +50,7 @@
       fab install_pkg_all:/tmp/contrail-install-packages-x.x.x.x-xxx~openstack_version_all.deb
          
 * Upgrade all nodes to recommended kernel
+
       fab upgrade_kernel_all
 
 
@@ -60,8 +61,9 @@
       /opt/netronome/bin/nfp-media --set-media=phy0=4x10G
       service ns-core-nic.autorun clean
       reboot
-         
+
 * Install ns-agilio-vrouter-depends-packages
+
       fab install_ns_agilio_nic:/tmp/ns-agilio-vrouter-depends-packages_x.x.x.x-xxx_amd64.deb
 
 * Install Contrail packages on all nodes
@@ -96,7 +98,7 @@ NOTE: This guide assumes that you have already inserted the Netronome NIC on the
         (compute-node)# apt-get install linux-image-extra-3.13.0-100-generic 
         (compute-node)# apt-get install linux-image-generic 
         (compute-node)# apt-get install linux-generic
-        
+
   In /etc/default/grub, ensure
   
         GRUB_DEFAULT='1>Ubuntu, with Linux 3.13.0-100-generic'
