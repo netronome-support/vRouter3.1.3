@@ -67,13 +67,18 @@
       fab install_ns_agilio_nic:/tmp/ns-agilio-vrouter-depends-packages_x.x.x.x-xxx_amd64.deb
 
 * Install Contrail packages on all nodes
+
       fab install_contrail
 
 * Setup control_data interfaces
+
       fab setup_interface
 
 * Provision the cluster
+
       fab setup_all
+
+
 
 ## On Netronome compute node
 
