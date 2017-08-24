@@ -6,6 +6,9 @@
 * Contrail-Cloud 3.1.2.0-65 (OpenStack Kilo/Mitaka)
 * Agilio vRouter 3.1.0.0-124
 
+## Remove existing Contrail & Fabric installations
+dpkg -l | awk '/contrail/ {print $2}' | xargs -Iz dpkg -r z
+
 ## On all nodes
 * Install Ubuntu 14.04.4 on all the nodes in the setup
          
