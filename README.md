@@ -53,6 +53,9 @@
 
       fab upgrade_kernel_all
 
+* Install ns-agilio-vrouter-depends-packages
+
+      fab install_ns_agilio_nic:/tmp/ns-agilio-vrouter-depends-packages_x.x.x.x-xxx_amd64.deb
 
 * Change the media configuration of the SmartNIC if you are using breakout cables (4 x 10GbE ---> 1 X 40GbE)
          
@@ -61,10 +64,6 @@
       /opt/netronome/bin/nfp-media --set-media=phy0=4x10G
       service ns-core-nic.autorun clean
       reboot
-
-* Install ns-agilio-vrouter-depends-packages
-
-      fab install_ns_agilio_nic:/tmp/ns-agilio-vrouter-depends-packages_x.x.x.x-xxx_amd64.deb
 
 * Install Contrail packages
 
