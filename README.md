@@ -72,7 +72,9 @@
 
       fab install_contrail
 
-     * java fix
+NOTE: If the above command fails when attempting to install default-jre-headless, execute the script below and rerun: fab install_contrail.
+
+     * JRE_install
 
       #!/bin/bash
       sed -i '1s/^/#/' /etc/apt/sources.list
