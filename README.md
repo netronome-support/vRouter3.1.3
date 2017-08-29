@@ -72,16 +72,16 @@
 
       fab install_contrail
 
-NOTE: If the above command fails when attempting to install default-jre-headless, execute the script below and rerun: *fab install_contrail*.
+      NOTE: If the above command fails when attempting to install default-jre-headless, execute the script below and rerun: *fab install_contrail*.
 
-    * #JRE_install
+      * #JRE_install
 
-      #!/bin/bash
-      sed -i '1s/^/#/' /etc/apt/sources.list
-      apt-get update
-      DEBIAN_FRONTEND=noninteractive apt-get -y --force-yes --allow-unauthenticated install default-jre-headless
-      sed -i '1s/^.//' /etc/apt/sources.list
-      apt-get update
+         #!/bin/bash
+         sed -i '1s/^/#/' /etc/apt/sources.list
+         apt-get update
+         DEBIAN_FRONTEND=noninteractive apt-get -y --force-yes --allow-unauthenticated install default-jre-headless
+         sed -i '1s/^.//' /etc/apt/sources.list
+         apt-get update
 
 * Setup control_data interfaces
 
