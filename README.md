@@ -52,21 +52,35 @@
       cd /opt/contrail/utils
       fab install_pkg_all:/tmp/contrail-install-packages-x.x.x.x-xxx~openstack_version_all.deb
          
+* Confirm installation of Contrail packages
+
+      dpkg -l | grep contrail
+
 * Upgrade all nodes to recommended kernel
 
       fab upgrade_kernel_all
+
+* Confirm that correct kernel is running
+
+      #uname -r
+      3.13.0-106-generic
 
 * Install ns-agilio-vrouter-depends-packages
 
       fab install_ns_agilio_nic:/tmp/ns-agilio-vrouter-depends-packages_x.x.x.x-xxx_amd64.deb
 
-* Change the media configuration of the SmartNIC if you are using breakout cables (4 x 10GbE ---> 1 X 40GbE)
-         
-         This should create four NFP interfaces: nfp_p0, nfp_p1, nfp_p2, nfp_p3
+* Confirm installation of vRouter packages
 
-      /opt/netronome/bin/nfp-media --set-media=phy0=4x10G
-      service ns-core-nic.autorun clean
-      reboot
+      dpkg -l | grep vrouter
+
+* Install Contrail dependencies
+
+      cd /opt/contrail/contrail_install_repo
+      dpkg -i libnl-3-200_3.2.21-1ubuntu4_amd64.deb
+      apt-get -f install
+
+      wget http://launchpadlibrarian.net/264517293/libexpat1_2.1.0-4ubuntu1.3_amd64.deb
+      dpkg -i libexpat1_2.1.0-4ubuntu1.3_amd64.deb
 
 * Install Contrail packages
 
@@ -77,11 +91,21 @@ NOTE: If the above command fails when attempting to install default-jre-headless
 **#JRE_install**
 
       #!/bin/bash
-      sed -i '1s/^/#/' /etc/apt/sources.list
+      cp /etc/apt/sources.list /etc/apt/sources.list.back
+      
       apt-get update
       DEBIAN_FRONTEND=noninteractive apt-get -y --force-yes --allow-unauthenticated install default-jre-headless
       sed -i '1s/^.//' /etc/apt/sources.list
       apt-get update
+
+* Change the media configuration of the SmartNIC if you are using breakout cables (4 x 10GbE ---> 1 X 40GbE)
+         
+         This should create four NFP interfaces: nfp_p0, nfp_p1, nfp_p2, nfp_p3
+
+      modprobe nfp #load nfp.ko driver
+      /opt/netronome/bin/nfp-media --set-media=phy0=4x10G
+      service ns-core-nic.autorun clean
+      reboot
 
 * Setup control_data interfaces
 
