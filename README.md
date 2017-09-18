@@ -73,10 +73,11 @@
 
       dpkg -l | grep vrouter
 
-* Install Contrail dependencies
+* Install Contrail dependencies on all the computes
 
       cd /opt/contrail/contrail_install_repo
       dpkg -i libnl-3-200_3.2.21-1ubuntu4_amd64.deb
+      apt-get install nova-compute
       apt-get -f install
 
       wget http://launchpadlibrarian.net/264517293/libexpat1_2.1.0-4ubuntu1.3_amd64.deb

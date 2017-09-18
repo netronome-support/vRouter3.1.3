@@ -27,7 +27,7 @@ env.roledefs = {
     'database': [h],
     'build': [host_build],
     'storage-master': [h],
-    'storage-compute': [h, d],
+    'storage-compute': [d, h],
 }
 
 # required if using env.ns_agilio_vrouter
@@ -71,3 +71,5 @@ env.ostypes = {
     h: 'ubuntu',
     d: 'ubuntu',
 }
+
+env.enable_lbaas = True
