@@ -38,6 +38,7 @@ h : { 'ip': '172.18.48.32/24',
 d : { 'ip': '172.18.48.33/24',
 'gw' : '172.18.48.1',
 'device' :'nfp_p0'},
+}
 
 # Setup Netronome Agilio vRouter on specified nodes
 env.ns_agilio_vrouter = {

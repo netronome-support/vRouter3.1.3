@@ -14,6 +14,10 @@
          
 ## On Controller node
 
+*Install Java
+
+      apt-get -y --force-yes --allow-unauthenticated install default-jre-headless
+
 * Download & install Contrail packages
 
       dpkg -i contrail-install-packages_3.1.*.*_all.deb
@@ -87,18 +91,6 @@
 
       fab install_contrail
 
-NOTE: If the above command fails when attempting to install default-jre-headless, execute the script below and rerun: *fab install_contrail*.
-
-**#JRE_install**
-
-      #!/bin/bash
-      cp /etc/apt/sources.list /etc/apt/sources.list.back
-      
-      apt-get update
-      DEBIAN_FRONTEND=noninteractive apt-get -y --force-yes --allow-unauthenticated install default-jre-headless
-      sed -i '1s/^.//' /etc/apt/sources.list
-      apt-get update
-
 * Change the media configuration of the SmartNIC if you are using breakout cables (4 x 10GbE ---> 1 X 40GbE)
          
          This should create four NFP interfaces: nfp_p0, nfp_p1, nfp_p2, nfp_p3
@@ -112,7 +104,7 @@ NOTE: If the above command fails when attempting to install default-jre-headless
 
       fab setup_interface
 
-NOTE: After this step you should have communication on the underlay network
+NOTE: After this step you should have communication on the underlay network - Test by pinging between the interfaces
 
 * Provision the cluster
 
