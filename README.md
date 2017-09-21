@@ -48,8 +48,13 @@
                                   'auto:split'}
                   }
 
-  [Click for example files](https://github.com/netronome-support/vRouter/tree/master/testbed)
+** Testbed examples
 
+  [Testbed examples directory](https://github.com/netronome-support/vRouter/tree/master/testbed)
+
+  [Single node testbed](https://raw.githubusercontent.com/netronome-support/vRouter/master/testbed/testbed_1node.py)
+  [2 node testbed](https://raw.githubusercontent.com/netronome-support/vRouter/master/testbed/testbed_2node.py)
+  [3 node testbed](https://raw.githubusercontent.com/netronome-support/vRouter/master/testbed/testbed_3node.py)
 
 * Install contrail-install-packages on remaining nodes
 
@@ -71,6 +76,7 @@
 
 * Install ns-agilio-vrouter-depends-packages
 
+      cd /opt/contrail/utils
       fab install_ns_agilio_nic:/tmp/ns-agilio-vrouter-depends-packages_x.x.x.x-xxx_amd64.deb
 
 * Confirm installation of vRouter packages
@@ -82,7 +88,7 @@
       cd /opt/contrail/contrail_install_repo
       dpkg -i libnl-3-200_3.2.21-1ubuntu4_amd64.deb
       apt-get install nova-compute
-      apt-get -f install
+      apt-get -f install -y
 
       wget http://launchpadlibrarian.net/264517293/libexpat1_2.1.0-4ubuntu1.3_amd64.deb
       dpkg -i libexpat1_2.1.0-4ubuntu1.3_amd64.deb
