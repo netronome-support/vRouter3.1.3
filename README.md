@@ -14,7 +14,7 @@
          
 ## On Controller node
 
-*Install Java
+* Install Java
 
       apt-get -y --force-yes --allow-unauthenticated install default-jre-headless
 
@@ -27,28 +27,8 @@
 * Populate testbed with relevant information
 
          (controller-node)# cat /opt/contrail/utils/fabfile/testbeds/testbed.py
-         
-                  bond= {
-                      compute1 : { 'name': 'bond0', 'member': ['nfp_p0','nfp_p1','nfp_p2','nfp_p3'], 'mode': '802.3ad',    
-                                'xmit_hash_policy': 'layer3+4' },
-                      compute2 : { 'name': 'bond0', 'member': ['nfp_p0','nfp_p1','nfp_p2','nfp_p3'], 'mode': '802.3ad',    
-                                'xmit_hash_policy': 'layer3+4' },
-                  }
-                  
-                  control_data = {
-                      controller : { 'ip': '172.31.255.1/24', 'gw' : '172.31.255.1', 'device': 'eth1' },
-                      compute1 : { 'ip': '172.31.255.2/24', 'gw' : '172.31.255.1', 'device': 'bond0' },
-                      compute2 : { 'ip': '172.31.255.3/24', 'gw' : '172.31.255.1', 'device': 'bond0' },
-                  }
-         
-                  env.ns_agilio_vrouter = {
-                      compute1: {'huge_page_alloc': '24G', 'huge_page_size': '1G', 'coremask': '2,4', 'pinning_mode': 
-                                  'auto:split'},
-                      compute2: {'huge_page_alloc': '24G', 'huge_page_size': '1G', 'coremask': '2,4', 'pinning_mode': 
-                                  'auto:split'}
-                  }
 
-** Testbed examples
+### Testbed examples
 
   [Testbed examples directory](https://github.com/netronome-support/vRouter/tree/master/testbed)
 
