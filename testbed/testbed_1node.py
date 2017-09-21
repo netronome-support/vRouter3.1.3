@@ -51,6 +51,15 @@ env.openstack_admin_password = 'netronome'
 #env.hostnames = {
 #    'all': ['a0s1']
 #}
+
+# Setup Netronome Agilio vRouter on specified nodes
+env.ns_agilio_vrouter = {
+h: {'huge_page_alloc': '24G',
+'huge_page_size' : '1G',
+'coremask' : '2,4',
+'pinning_mode' : 'auto:split'}
+}
+
 env.hostnames = {
     host: 'host',
 }
