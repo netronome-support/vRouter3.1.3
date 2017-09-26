@@ -105,7 +105,7 @@ NOTE: After this step you should have communication on the underlay network - Te
 
 ## On all nodes 
 
-* Verify if provisioning was successfully
+* Verify whether deployment was successful
 
       contrail-status
       /opt/netronome/libexec/nfp-vrouter-status -r
