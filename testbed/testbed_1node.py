@@ -54,7 +54,7 @@ env.openstack_admin_password = 'netronome'
 
 # Setup Netronome Agilio vRouter on specified nodes
 env.ns_agilio_vrouter = {
-h: {'huge_page_alloc': '24G',
+host: {'huge_page_alloc': '12G',
 'huge_page_size' : '1G',
 'coremask' : '2,4',
 'pinning_mode' : 'auto:split'}
