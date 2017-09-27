@@ -2,7 +2,7 @@
 
 ## Pre-Requisites
 
-* Ubuntu 14.04.4 (3.13.0-100 Errata 47 patched kernel)
+* Ubuntu 14.04.3 (3.13.0-100 Errata 47 patched kernel)
 * Contrail-Cloud 3.1.2.0-65 (OpenStack Kilo/Mitaka)
 * Agilio vRouter 3.1.0.0-124
 
