@@ -1,0 +1,378 @@
+#
+# Pktgen - Ver: 3.0.17 (DPDK 16.11.0)
+# Copyright (c) <2010-2016>, Intel Corporation. All rights reserved., Powered by Intel® DPDK
+
+# Command line arguments: (DPDK args are defaults)
+# /root/dpdk-pktgen -c ff -n 3 -m 512 --proc-type primary -- -m [1:2].0 -m [3:4].1 -m [5:6].2 -m 7.4 -N -T -P 
+
+#######################################################################
+# Pktgen Configuration script information:
+#   GUI socket is Not Enabled
+#   Flags 0000080c
+#   Number of ports: 4
+#   Number ports per page: 4
+#   Number descriptors: RX 512 TX: 512
+#   Promiscuous mode is Enabled
+
+
+# Global configuration:
+geometry 132x44
+mac_from_arp disable
+
+######################### Port  0 ##################################
+#
+# Port:  0, Burst: 32, Rate:100%, Flags:00000000, TX Count:Forever
+#           SeqCnt:0, Prime:1 VLAN ID:0001, Link: <UP-10000-FD>
+#
+# Set up the primary port information:
+set 0 count 0
+set 0 size 64
+set 0 rate 16
+set 0 burst 32
+set 0 sport 1234
+set 0 dport 5678
+set 0 prime 1
+type ipv4 0
+proto tcp 0
+set ip dst 0 10.10.2.4
+set ip src 0 10.10.2.3/32
+set mac 0 02:c6:ec:e4:13:9d
+vlanid 0 1
+
+pattern 0 abc
+
+jitter 0 50
+mpls 0 disable
+mpls_entry 0 0
+qinq 0 disable
+qinqids 0 0 0
+gre 0 disable
+gre_eth 0 disable
+gre_key 0 0
+#
+# Port flag values:
+icmp.echo 0 disable
+pcap 0 disable
+range 0 disable
+latency 0 disable
+process 0 disable
+capture 0 disable
+rxtap 0 disable
+txtap 0 disable
+vlan 0 disable
+
+#
+# Range packet information:
+src.mac start 0 02:17:6c:b5:a9:14
+src.mac min 0 00:00:00:00:00:00
+src.mac max 0 00:00:00:00:00:00
+src.mac inc 0 00:00:00:00:00:00
+dst.mac start 0 02:e3:76:2e:d1:f3
+dst.mac min 0 00:00:00:00:00:00
+dst.mac max 0 00:00:00:00:00:00
+dst.mac inc 0 00:00:00:00:00:00
+
+src.ip start 0 192.168.0.1
+src.ip min 0 192.168.0.1
+src.ip max 0 192.168.0.254
+src.ip inc 0 0.0.0.0
+
+dst.ip start 0 192.168.1.1
+dst.ip min 0 192.168.1.1
+dst.ip max 0 192.168.1.254
+dst.ip inc 0 0.0.0.1
+
+ip.proto 0 tcp
+
+src.port start 0 0
+src.port min 0 0
+src.port max 0 254
+src.port inc 0 1
+
+dst.port start 0 0
+dst.port min 0 0
+dst.port max 0 254
+dst.port inc 0 1
+
+vlan.id start 0 1
+vlan.id min 0 1
+vlan.id max 0 4095
+vlan.id inc 0 0
+
+pkt.size start 0 64
+pkt.size min 0 64
+pkt.size max 0 1518
+pkt.size inc 0 0
+
+#
+# Set up the sequence data for the port.
+set 0 seqCnt 0
+
+######################### Port  1 ##################################
+#
+# Port:  1, Burst: 32, Rate:100%, Flags:00000000, TX Count:Forever
+#           SeqCnt:0, Prime:1 VLAN ID:0001, Link: <UP-10000-FD>
+#
+# Set up the primary port information:
+set 1 count 0
+set 1 size 64
+set 1 rate 16
+set 1 burst 32
+set 1 sport 1234
+set 1 dport 5678
+set 1 prime 1
+type ipv4 1
+proto tcp 1
+set ip dst 1 10.10.3.4
+set ip src 1 10.10.3.3/32
+set mac 1 02:7d:a9:18:64:90
+vlanid 1 1
+
+pattern 1 abc
+
+jitter 1 50
+mpls 1 disable
+mpls_entry 1 0
+qinq 1 disable
+qinqids 1 0 0
+gre 1 disable
+gre_eth 1 disable
+gre_key 1 0
+#
+# Port flag values:
+icmp.echo 1 disable
+pcap 1 disable
+range 1 disable
+latency 1 disable
+process 1 disable
+capture 1 disable
+rxtap 1 disable
+txtap 1 disable
+vlan 1 disable
+
+#
+# Range packet information:
+src.mac start 1 02:e3:76:2e:d1:f3
+src.mac min 1 00:00:00:00:00:00
+src.mac max 1 00:00:00:00:00:00
+src.mac inc 1 00:00:00:00:00:00
+dst.mac start 1 02:17:6c:b5:a9:14
+dst.mac min 1 00:00:00:00:00:00
+dst.mac max 1 00:00:00:00:00:00
+dst.mac inc 1 00:00:00:00:00:00
+
+src.ip start 1 192.168.1.1
+src.ip min 1 192.168.1.1
+src.ip max 1 192.168.1.254
+src.ip inc 1 0.0.0.0
+
+dst.ip start 1 192.168.2.1
+dst.ip min 1 192.168.2.1
+dst.ip max 1 192.168.2.254
+dst.ip inc 1 0.0.0.1
+
+ip.proto 1 tcp
+
+src.port start 1 256
+src.port min 1 256
+src.port max 1 510
+src.port inc 1 1
+
+dst.port start 1 256
+dst.port min 1 256
+dst.port max 1 510
+dst.port inc 1 1
+
+vlan.id start 1 1
+vlan.id min 1 1
+vlan.id max 1 4095
+vlan.id inc 1 0
+
+pkt.size start 1 64
+pkt.size min 1 64
+pkt.size max 1 1518
+pkt.size inc 1 0
+
+#
+# Set up the sequence data for the port.
+set 1 seqCnt 0
+
+######################### Port  2 ##################################
+#
+# Port:  2, Burst: 32, Rate:100%, Flags:00000000, TX Count:Forever
+#           SeqCnt:0, Prime:1 VLAN ID:0001, Link: <UP-10000-FD>
+#
+# Set up the primary port information:
+set 2 count 0
+set 2 size 64
+set 2 rate 16
+set 2 burst 32
+set 2 sport 1234
+set 2 dport 5678
+set 2 prime 1
+type ipv4 2
+proto tcp 2
+set ip dst 2 10.10.4.4
+set ip src 2 10.10.4.3/32
+set mac 2 02:fd:36:f9:a6:03
+vlanid 2 1
+
+pattern 2 abc
+
+jitter 2 50
+mpls 2 disable
+mpls_entry 2 0
+qinq 2 disable
+qinqids 2 0 0
+gre 2 disable
+gre_eth 2 disable
+gre_key 2 0
+#
+# Port flag values:
+icmp.echo 2 disable
+pcap 2 disable
+range 2 disable
+latency 2 disable
+process 2 disable
+capture 2 disable
+rxtap 2 disable
+txtap 2 disable
+vlan 2 disable
+
+#
+# Range packet information:
+src.mac start 2 02:2e:50:d5:a0:15
+src.mac min 2 00:00:00:00:00:00
+src.mac max 2 00:00:00:00:00:00
+src.mac inc 2 00:00:00:00:00:00
+dst.mac start 2 02:58:83:27:88:e5
+dst.mac min 2 00:00:00:00:00:00
+dst.mac max 2 00:00:00:00:00:00
+dst.mac inc 2 00:00:00:00:00:00
+
+src.ip start 2 192.168.2.1
+src.ip min 2 192.168.2.1
+src.ip max 2 192.168.2.254
+src.ip inc 2 0.0.0.0
+
+dst.ip start 2 192.168.4.1
+dst.ip min 2 192.168.4.1
+dst.ip max 2 192.168.4.254
+dst.ip inc 2 0.0.0.1
+
+ip.proto 2 tcp
+
+src.port start 2 512
+src.port min 2 512
+src.port max 2 766
+src.port inc 2 1
+
+dst.port start 2 512
+dst.port min 2 512
+dst.port max 2 766
+dst.port inc 2 1
+
+vlan.id start 2 1
+vlan.id min 2 1
+vlan.id max 2 4095
+vlan.id inc 2 0
+
+pkt.size start 2 64
+pkt.size min 2 64
+pkt.size max 2 1518
+pkt.size inc 2 0
+
+#
+# Set up the sequence data for the port.
+set 2 seqCnt 0
+
+######################### Port  3 ##################################
+#
+# Port:  3, Burst: 32, Rate:100%, Flags:00000000, TX Count:Forever
+#           SeqCnt:0, Prime:1 VLAN ID:0001, Link: <UP-10000-FD>
+#
+# Set up the primary port information:
+set 3 count 0
+set 3 size 64
+set 3 rate 16
+set 3 burst 32
+set 3 sport 1234
+set 3 dport 5678
+set 3 prime 1
+type ipv4 3
+proto tcp 3
+set ip dst 3 10.10.5.4
+set ip src 3 10.10.5.3/32
+set mac 3 02:f5:99:73:c5:6b
+vlanid 3 1
+
+pattern 3 abc
+
+jitter 3 50
+mpls 3 disable
+mpls_entry 3 0
+qinq 3 disable
+qinqids 3 0 0
+gre 3 disable
+gre_eth 3 disable
+gre_key 3 0
+#
+# Port flag values:
+icmp.echo 3 disable
+pcap 3 disable
+range 3 disable
+latency 3 disable
+process 3 disable
+capture 3 disable
+rxtap 3 disable
+txtap 3 disable
+vlan 3 disable
+
+#
+# Range packet information:
+src.mac start 3 02:58:83:27:88:e5
+src.mac min 3 00:00:00:00:00:00
+src.mac max 3 00:00:00:00:00:00
+src.mac inc 3 00:00:00:00:00:00
+dst.mac start 3 02:2e:50:d5:a0:15
+dst.mac min 3 00:00:00:00:00:00
+dst.mac max 3 00:00:00:00:00:00
+dst.mac inc 3 00:00:00:00:00:00
+
+src.ip start 3 192.168.4.1
+src.ip min 3 192.168.4.1
+src.ip max 3 192.168.4.254
+src.ip inc 3 0.0.0.0
+
+dst.ip start 3 192.168.4.1
+dst.ip min 3 192.168.4.1
+dst.ip max 3 192.168.4.254
+dst.ip inc 3 0.0.0.1
+
+ip.proto 3 tcp
+
+src.port start 3 768
+src.port min 3 768
+src.port max 3 1022
+src.port inc 3 1
+
+dst.port start 3 768
+dst.port min 3 768
+dst.port max 3 1022
+dst.port inc 3 1
+
+vlan.id start 3 1
+vlan.id min 3 1
+vlan.id max 3 4095
+vlan.id inc 3 0
+
+pkt.size start 3 64
+pkt.size min 3 64
+pkt.size max 3 1518
+pkt.size inc 3 0
+
+#
+# Set up the sequence data for the port.
+set 3 seqCnt 0
+
+################################ Done #################################
