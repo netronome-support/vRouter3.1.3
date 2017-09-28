@@ -5,6 +5,7 @@
 * Ubuntu 14.04.3 (3.13.0-100 Errata 47 patched kernel)
 * Contrail-Cloud 3.1.2.0-65 (OpenStack Kilo/Mitaka)
 * Agilio vRouter 3.1.0.0-281
+* Minimum required hosts: 2
 
 ## Remove existing Contrail & Fabric installations
       dpkg -l | awk '/contrail/ {print $2}' | xargs -Iz dpkg -r z
@@ -35,7 +36,6 @@
 
    [Testbed examples directory](https://github.com/netronome-support/vRouter/tree/master/testbed)
 
-   [Single node testbed](https://raw.githubusercontent.com/netronome-support/vRouter/master/testbed/testbed_1node.py) |
    [2 node testbed](https://raw.githubusercontent.com/netronome-support/vRouter/master/testbed/testbed_2node.py) |
    [3 node testbed](https://raw.githubusercontent.com/netronome-support/vRouter/master/testbed/testbed_3node.py)
 
