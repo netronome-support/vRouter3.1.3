@@ -11,7 +11,7 @@
 
 ## On all nodes
 
-* Install Ubuntu 14.04.4 on all the nodes in the setup
+* Install Ubuntu 14.04.3 on all the nodes in the setup
     
 ## On Controller node
 
