@@ -4,7 +4,7 @@
 
 * Ubuntu 14.04.3 (3.13.0-100 Errata 47 patched kernel)
 * Contrail-Cloud 3.1.2.0-65 (OpenStack Kilo/Mitaka)
-* Agilio vRouter 3.1.0.0-124
+* Agilio vRouter 3.1.0.0-281
 
 ## Remove existing Contrail & Fabric installations
       dpkg -l | awk '/contrail/ {print $2}' | xargs -Iz dpkg -r z
