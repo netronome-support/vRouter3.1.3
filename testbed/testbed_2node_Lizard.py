@@ -1,7 +1,7 @@
 from fabric.api import env
 
 #Management addresses of hosts in the cluster
-lizard = 'root@172.26.1.126'          # control & compute node - nfp
+lizard = 'root@172.26.1.126' # control & compute node - nfp
 spock = 'root@172.26.1.127' # compute node - nfp
 
 #External routers if any
