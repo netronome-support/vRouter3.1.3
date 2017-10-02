@@ -20,6 +20,16 @@
 
       apt-get -y --force-yes --allow-unauthenticated install default-jre-headless
 
+* Install BSP dependencies
+```
+apt-get install make autoconf automake libtool \
+gcc g++ bison flex hwloc-nox libreadline-dev libpcap-dev dkms libftdi1 libjansson4 \
+libjansson-dev guilt pkg-config libevent-dev ethtool libssl-dev \
+libnl-3-200 libnl-3-dev libnl-genl-3-200 libnl-genl-3-dev psmisc gawk \
+libzmq3-dev protobuf-c-compiler protobuf-compiler python-protobuf \
+libnuma1 libnuma-dev python-six python-ethtool
+```
+
 * Download & install Contrail packages
 
       dpkg -i contrail-install-packages_3.1.*.*_all.deb
@@ -116,8 +126,6 @@ reboot
 * Provision the cluster
 
       fab setup_all
-
-
 
 ## On all nodes 
 
