@@ -101,10 +101,6 @@ reboot
 
 * Confirm installation of vRouter packages
 
-      dpkg -l | grep vrouter
-
-* Install Contrail packages
-
       # dpkg -l | grep vrouter
       ns-agilio-vrouter-depends-packages 
 
