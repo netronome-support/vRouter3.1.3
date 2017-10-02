@@ -59,6 +59,21 @@
       #uname -r
       3.13.0-106-generic
 
+* Confirm that the required kernel parameters are present
+
+      #cat /proc/cmdline
+      BOOT_IMAGE=.. intel_iommu=on iommu=pt intremap=on
+
+>**NOTE:** If the aforementioned parameters are missing it may be necessary to modify GRUB manually:
+```
+vi /etc/default/grub
+#edit the following line:
+GRUB_CMDLINE_LINUX="intel_iommu=on iommu=pt intremap=on" 
+#apply changes
+update-grub
+reboot
+```
+
 * Install Contrail dependencies on all the computes
 
       cd /opt/contrail/contrail_install_repo
@@ -95,7 +110,7 @@
 
       fab setup_interface
 
-NOTE: After this step you should have communication on the underlay network - Test by pinging between the interfaces
+>**NOTE:** After this step you should have communication on the underlay network - Test by pinging between the interfaces
 
 * Provision the cluster
 
