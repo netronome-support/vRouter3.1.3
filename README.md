@@ -56,7 +56,7 @@
 
 * Confirm that correct kernel is running
 
-      #uname -r
+      # uname -r
       3.13.0-106-generic
 
 * Confirm that the required kernel parameters are present
@@ -95,9 +95,10 @@ reboot
 
 * Install Contrail packages
 
-      fab install_contrail
+      # dpkg -l | grep vrouter
+      ns-agilio-vrouter-depends-packages 
 
-* Change the media configuration of the SmartNIC if you are using breakout cables (4 x 10GbE ---> 1 X 40GbE)
+* Change the media configuration of the SmartNIC if you are using **breakout cables** (1 X 40GbE(default) -> 4 x 10GbE)
          
          This should create four NFP interfaces: nfp_p0, nfp_p1, nfp_p2, nfp_p3
 
