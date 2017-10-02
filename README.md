@@ -20,9 +20,9 @@
 
       apt-get -y --force-yes --allow-unauthenticated install default-jre-headless
 
-* Install BSP dependencies
+* Install BSP dependencies on the computes
 ```
-apt-get install make autoconf automake libtool \
+apt-get install -y make autoconf automake libtool \
 gcc g++ bison flex hwloc-nox libreadline-dev libpcap-dev dkms libftdi1 libjansson4 \
 libjansson-dev guilt pkg-config libevent-dev ethtool libssl-dev \
 libnl-3-200 libnl-3-dev libnl-genl-3-200 libnl-genl-3-dev psmisc gawk \
