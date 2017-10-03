@@ -16,6 +16,8 @@
     
 ## On Controller node
 
+>**NOTE:** The following commands must be executed on the Controller node if not specifically stated otherwise.
+
 * Install Java
 
       apt-get -y --force-yes --allow-unauthenticated install default-jre-headless
@@ -52,14 +54,15 @@ libnuma1 libnuma-dev python-six python-ethtool
 
 ---
 
-* Install contrail-install-packages on remaining nodes
+* Install Contrail packages on remaining nodes
 
       cd /opt/contrail/utils
       fab install_pkg_all:/tmp/contrail-install-packages-x.x.x.x-xxx~openstack_version_all.deb
          
 * Confirm installation of Contrail packages
 
-      dpkg -l | grep contrail
+      # dpkg -l | grep contrail
+      contrail-install-packages
 
 * Upgrade all nodes to recommended kernel
 
@@ -70,30 +73,33 @@ libnuma1 libnuma-dev python-six python-ethtool
       # uname -r
       3.13.0-106-generic
 
-* Confirm that the required kernel parameters are present
+* Confirm that the required kernel parameters are present **on all the nodes in the cluster**
 
       #cat /proc/cmdline
       BOOT_IMAGE=.. intel_iommu=on iommu=pt intremap=on
 
->**NOTE:** If the aforementioned parameters are missing it may be necessary to modify GRUB manually:
+>**NOTE:** If the aforementioned parameters are **missing** from the output modify GRUB manually:
 ```
 vi /etc/default/grub
 #edit the following line:
-GRUB_CMDLINE_LINUX="intel_iommu=on iommu=pt intremap=on" 
+sed 's/GRUB_CMDLINE_LINUX=/GRUB_CMDLINE_LINUX="intel_iommu=on iommu=pt intremap=on"/' /etc/default/grub
 #apply changes
 update-grub
+#confirm changes
+grep iommu /boot/grub/grub.cfg
+#reboot
 reboot
 ```
 
-* Install Contrail dependencies on all the computes
+* Install Contrail dependencies by running the commands below **on all the computes**
 
-      cd /opt/contrail/contrail_install_repo
-      dpkg -i libnl-3-200_3.2.21-1ubuntu4_amd64.deb libc6*
-      apt-get install nova-compute
-      apt-get -f install -y
+        cd /opt/contrail/contrail_install_repo
+        dpkg -i libnl-3-200_3.2.21-1ubuntu4_amd64.deb libc6*
+        apt-get install nova-compute
+        apt-get -f install -y
 
-      wget http://launchpadlibrarian.net/264517293/libexpat1_2.1.0-4ubuntu1.3_amd64.deb
-      dpkg -i libexpat1_2.1.0-4ubuntu1.3_amd64.deb
+        wget http://launchpadlibrarian.net/264517293/libexpat1_2.1.0-4ubuntu1.3_amd64.deb
+        dpkg -i libexpat1_2.1.0-4ubuntu1.3_amd64.deb
 
 * Install ns-agilio-vrouter-depends-packages
 
@@ -110,11 +116,11 @@ reboot
          This should create four NFP interfaces: nfp_p0, nfp_p1, nfp_p2, nfp_p3
 
       modprobe nfp #load nfp.ko driver
-      /opt/netronome/bin/nfp-media --set-media=phy0=4x10G
+      /opt/netronome/bin/nfp-media phy0=4x10G
       service ns-core-nic.autorun clean
       reboot
 
-* Install contrail
+* Install Contrail
 
       fab install_contrail
 
