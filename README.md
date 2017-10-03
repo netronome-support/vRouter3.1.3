@@ -47,6 +47,7 @@ libnuma1 libnuma-dev python-six python-ethtool
    [Testbed examples directory](https://github.com/netronome-support/vRouter/tree/master/testbed)
 
    [2 node testbed](https://raw.githubusercontent.com/netronome-support/vRouter/master/testbed/testbed_2node.py) |
+   [2 node(bond interface) testbed](https://raw.githubusercontent.com/netronome-support/vRouter/master/testbed/testbed_2node_bond.py) |
    [3 node testbed](https://raw.githubusercontent.com/netronome-support/vRouter/master/testbed/testbed_3node.py)
 
 ---
