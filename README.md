@@ -113,6 +113,10 @@ reboot
       service ns-core-nic.autorun clean
       reboot
 
+* Install contrail
+
+      fab install_contrail
+
 * Setup control_data interfaces
 
       fab setup_interface
