@@ -82,7 +82,7 @@ libnuma1 libnuma-dev python-six python-ethtool
 ```
 vi /etc/default/grub
 #edit the following line:
-sed 's/GRUB_CMDLINE_LINUX=/GRUB_CMDLINE_LINUX="intel_iommu=on iommu=pt intremap=on"/' /etc/default/grub
+sed -i '/GRUB_CMDLINE_LINUX=/c\GRUB_CMDLINE_LINUX="intel_iommu=on iommu=pt intremap=on"' /etc/default/grub
 #apply changes
 update-grub
 #confirm changes
