@@ -113,6 +113,7 @@ reboot
 
 * Install Contrail
 
+      cd /opt/contrail/utils
       fab install_contrail
 
 * Setup control_data interfaces
@@ -129,8 +130,95 @@ reboot
 
 * Verify whether deployment was successful
 
-      contrail-status
-      /opt/netronome/libexec/nfp-vrouter-status -r
+**Contrail status**
+
+```
+contrail-status
+
+== Contrail vRouter ==
+supervisor-vrouter:           active
+contrail-vrouter-agent        active
+contrail-vrouter-nodemgr      active
+
+== Contrail Control ==
+supervisor-control:           active
+contrail-control              active
+contrail-control-nodemgr      active
+contrail-dns                  active
+contrail-named                active
+
+== Contrail Analytics ==
+supervisor-analytics:         active
+contrail-alarm-gen            active
+contrail-analytics-api        active
+contrail-analytics-nodemgr    active
+contrail-collector            active
+contrail-query-engine         active
+contrail-snmp-collector       active
+contrail-topology             active
+
+== Contrail Config ==
+supervisor-config:            active
+contrail-api:0                active
+contrail-config-nodemgr       active
+contrail-device-manager       active
+contrail-discovery:0          active
+contrail-schema               active
+contrail-svc-monitor          active
+ifmap                         active
+
+== Contrail Web UI ==
+supervisor-webui:             active
+contrail-webui                active
+contrail-webui-middleware     active
+
+== Contrail Database ==
+contrail-database:            active
+
+== Contrail Supervisor Database ==
+supervisor-database:          active
+contrail-database-nodemgr     active
+kafka                         active
+
+== Contrail Support Services ==
+supervisor-support-service:   active
+rabbitmq-server               active
+```
+
+**vRouter status**
+
+```
+vrouter_troubleshoot.sh -R
+
+===[ TROUBLESHOOT ItemName:     nfp_vrouter_status ]===
+===[ TROUBLESHOOT Description:  Agilio vRouter health ]===
+
+======================[ Agilio vRouter Health Report ]======================
+Version info:
+------------------
+nfp_vrouter module rev:                      ... 00feda2e055904f48e0ed8c98cb53fd05a4671d2
+Firmware rev:                                ... 00feda2e055904f48e0ed8c98cb53fd05a4671d2
+Firmware flowenv rev:                        ... 1523449544e7
+Firmware global reorder rev:                 ... 25c868a8c724
+Firmware NFD rev:                            ... 7513c6c11c9b
+
+Agilio vRouter Health Report:
+------------------
+NFP: Card Detected                           ... [PASS]
+NFP: Firmware Loaded                         ... [PASS]
+NFP: Control Message Channel Responsive      ... [PASS]
+NFP: Ingress NBI Backed Up                   ... [PASS]
+NFP: Parity Errors                           ... [PASS]
+Kernel Module: nfp                           ... [PASS]
+Kernel Module: nfp_vrouter                   ... [PASS]
+Kernel Module: vrouter                       ... [PASS]
+Userspace Process: virtiorelayd              ... [PASS]
+
+Overall System State     [PASS]
+
+```
+
+
 
 
 
