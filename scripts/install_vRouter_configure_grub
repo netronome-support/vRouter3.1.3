@@ -1,0 +1,12 @@
+#!/bin/bash
+
+#vi /etc/default/grub
+#edit the following line:
+sed -i '/GRUB_CMDLINE_LINUX=/c\GRUB_CMDLINE_LINUX="intel_iommu=on iommu=pt intremap=on"' /etc/default/grub
+#apply changes
+update-grub
+#confirm changes
+grep iommu /boot/grub/grub.cfg
+#reboot
+reboot
+

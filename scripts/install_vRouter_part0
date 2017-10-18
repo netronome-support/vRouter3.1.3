@@ -1,0 +1,13 @@
+#!/bin/bash
+
+apt-get -y --force-yes --allow-unauthenticated install default-jre-headless
+
+dpkg -i contrail-install-packages_3.1.*.*_all.deb
+/opt/contrail/contrail_packages/setup.sh
+apt-get update
+
+wget https://raw.githubusercontent.com/netronome-support/vRouter/master/testbed/testbed_2node_bond.py
+
+cp testbed_2node_bond.py /opt/contrail/utils/fabfile/testbeds/testbed.py
+
+

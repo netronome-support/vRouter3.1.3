@@ -1,0 +1,10 @@
+#!/bin/bash
+
+contrail=`ls /root/contrail*`
+
+cd /opt/contrail/utils
+fab install_pkg_all:$contrail
+
+fab upgrade_kernel_all
+
+
