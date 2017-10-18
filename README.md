@@ -114,7 +114,7 @@ reboot
 
 * Install Contrail
 
->**NOTE:** Confirm presence of "127.0.0.1 $hostname" where ```hostname=`cat /etc/hostname` ```
+>**NOTE:** Confirm presence of ```"127.0.0.1 $hostname"``` in **/etc/hosts** where ```hostname=`cat /etc/hostname` ```
 
       cd /opt/contrail/utils
       fab install_contrail
