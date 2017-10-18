@@ -111,7 +111,10 @@ reboot
       service ns-core-nic.autorun clean
       reboot
 
+
 * Install Contrail
+
+>**NOTE:** Confirm presence of "127.0.0.1 $hostname" where ```hostname=`cat /etc/hostname` ```
 
       cd /opt/contrail/utils
       fab install_contrail
