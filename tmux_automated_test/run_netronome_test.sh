@@ -44,6 +44,9 @@ SERVER_NODE_IP=172.16.0.109       #Compute node which server VM is located
 LINK_SIZE=20                    #Link size e.g. 40Gbits/s
 #~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+NODE_USERNAME="root"
+VM_USERNAME="root"
+
 # Driver state tracking. 
 # -1: Unknown state
 #  0: Virtio-pci driver attached
@@ -136,10 +139,7 @@ function test_iperf_1_instance {
 }
 
 
-function calculate_
-
-
-function find_dpdk_no_drop_rate{
+function find_dpdk_no_drop_rate {
     tmux capture-pane -t "Server_pktgen".0 
     server_rx=$(tmux show-buffer | grep "rx")
     server_tx=$(tmux show-buffer | grep "tx")
@@ -190,8 +190,8 @@ function test_dpdk_pcktgen {
     [ $(($direction & 2)) == 0 ] || tmux_send_window "Client_pktgen" set all size $pktsize
 
     # Set packet rate for test
-    #[ $(($direction & 1)) == 0 ] || tmux_send_window "Server_pktgen" set all rate $pktrate
-    #[ $(($direction & 2)) == 0 ] || tmux_send_window "Client_pktgen" set all rate $pktrate
+    [ $(($direction & 1)) == 0 ] || tmux_send_window "Server_pktgen" set all rate $pktrate
+    [ $(($direction & 2)) == 0 ] || tmux_send_window "Client_pktgen" set all rate $pktrate
     
     # Set traffic type for test
     [ $(($direction & 1)) == 0 ] || tmux_send_window "Server_pktgen" proto $trafficType all 
@@ -350,17 +350,17 @@ else # else $TMUX is not empty, start test.
     # Login server node
     echo "Logging into srv-dc14-2 on pane 2"
     tmux_send_pane 1 clear
-    tmux_send_pane 1 ssh "heat-admin@"$SERVER_NODE_IP
+    tmux_send_pane 1 ssh $VM_USERNAME"@"$SERVER_NODE_IP
     sleep 2
     
     echo "Logging into srv-dc14-2 on pane 3"
     tmux_send_pane 2 clear
-    tmux_send_pane 2 ssh "heat-admin@"$SERVER_NODE_IP
+    tmux_send_pane 2 ssh $VM_USERNAME"@"$SERVER_NODE_IP
     sleep 2
     
     echo "Logging into srv-dc14-2 on pane 3"
     tmux_send_pane 3 clear
-    tmux_send_pane 3 ssh "heat-admin@"$CLIENT_NODE_IP
+    tmux_send_pane 3 ssh $VM_USERNAME"@"$CLIENT_NODE_IP
     sleep 2
 
     tmux select-pane -t 2
@@ -372,8 +372,8 @@ else # else $TMUX is not empty, start test.
 
     # Log into VM's using management interface
     echo "Logging into different VM's"
-    tmux_send_pane 2 ssh "root@"$SERVER_IP
-    tmux_send_pane 3 ssh "root@"$CLIENT_IP
+    tmux_send_pane 2 ssh $NODE_USERNAME"@"$SERVER_IP
+    tmux_send_pane 3 ssh $NODE_USERNAME"@"$CLIENT_IP
     sleep 2
 
     # Alocate IP's to new interfaces.
@@ -387,18 +387,19 @@ else # else $TMUX is not empty, start test.
     echo "Logging into different VM's"
     #tmux_send_pane 2 ssh 192.168.122.6
     #tmux_send_pane 3 ssh 192.168.122.5
-    tmux_send_pane 2 ssh "root@"$SERVER_IP
-    tmux_send_pane 3 ssh "root@"$CLIENT_IP
+    #tmux_send_pane 2 ssh $NODE_USERNAME"@"$SERVER_IP
+    #tmux_send_pane 3 ssh $NODE_USERNAME"@"$CLIENT_IP
     sleep 2
 
     # Log windows into correct nodes and VM's
-    tmux_send_window "Server_pktgen" ssh "heat-admin@"$SERVER_NODE_IP
-    tmux_send_window "Server_vif" ssh "heat-admin@"$SERVER_NODE_IP
+    tmux_send_window "Server_pktgen" ssh $VM_USERNAME"@"$SERVER_NODE_IP
+    tmux_send_window "Client_pktgen" ssh $VM_USERNAME"@"$CLIENT_NODE_IP
+    tmux_send_window "Server_vif" ssh $VM_USERNAME"@"$SERVER_NODE_IP
     sleep 2
     #tmux_send_window "Server_pktgen" ssh 192.168.122.6
     #tmux_send_window "Client_pktgen" ssh 192.168.122.5
-    tmux_send_window "Server_pktgen" ssh "root@"$SERVER_IP
-    tmux_send_window "Client_pktgen" ssh "root@"$CLIENT_IP
+    tmux_send_window "Server_pktgen" ssh $NODE_USERNAME"@"$SERVER_IP
+    tmux_send_window "Client_pktgen" ssh $NODE_USERNAME"@"$CLIENT_IP
     sleep 2
 
     # Check and Mount hugepages in VM's

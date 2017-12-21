@@ -53,18 +53,18 @@
 ##############################################################################
 
 # Compute node info
-server_node_ip=102.16.0.19
-client_node_ip=102.16.0.10
-server_vm_ip=10.7.10.4
-client_vm_ip=10.7.10.2
+server_node_ip=172.26.1.111
+client_node_ip=172.26.1.112
+server_vm_ip=169.254.0.7
+client_vm_ip=169.254.0.7
 
 # Server VM - NOTE: THERE SHOULD BE 4 INTERFACES AND 4 IP's
-svm_interface_list=( 00:04.0 00:05.0 )    
-svm_ip_list=( 10.0.1.54 10.0.2.62)
+svm_interface_list=( 00:04.0 )    
+svm_ip_list=( 80.0.0.3 )
 
 # Client VM - NOTE: THERE SHOULD BE 4 INTERFACES AND 4 IP's
-cvm_interface_list=( 00:04.0 00:05.0 )    #
-cvm_ip_list=( 10.0.1.61 10.0.2.61)
+cvm_interface_list=( 00:04.0 )    #
+cvm_ip_list=( 80.0.0.4)
 
 # NOTE:
 # The physical addresses can be determined by checking the following command
@@ -87,13 +87,24 @@ cvm_ip_list=( 10.0.1.61 10.0.2.61)
 ##############################################################################
 
 ##############################################################################
+############################# Passwordless ssh setup #########################
+##############################################################################
+ssh-keygen
+ssh-copy-id "root@"$server_node_ip
+ssh-copy-id "root@"$client_node_ip
+ssh "root@"$server_node_ip ssh-copy-id "root@"$server_vm_ip
+ssh "root@"$client_node_ip ssh-copy-id "root@"$client_vm_ip
+##############################################################################
+
+
+##############################################################################
 ############################# Server node setup ##############################
 ##############################################################################
 # Edit setup_test.sh for server
 echo "Edit setup_test.sh for server"
-echo sed -i \''s/^'$(grep "^interface_list=" ./setup_test.sh)'/interface_list=('$(echo ${svm_interface_list[@]})')/'\' ./setup_test.sh | sh
-echo sed -i \''s/^'$(grep "^src_ip_list=" ./setup_test.sh)'/src_ip_list=('$(echo ${svm_ip_list[@]})')/'\' ./setup_test.sh | sh
-echo sed -i \''s/^'$(grep "^dst_ip_list=" ./setup_test.sh)'/dst_ip_list=('$(echo ${cvm_ip_list[@]})')/'\' ./setup_test.sh | sh
+sed -i "s/^$(grep "^interface_list=" ./setup_test.sh)/interface_list=(${svm_interface_list[@]})/" ./setup_test.sh
+sed -i "s/^$(grep "^src_ip_list=" ./setup_test.sh)/src_ip_list=(${svm_ip_list[@]})/" ./setup_test.sh
+sed -i "s/^$(grep "^dst_ip_list=" ./setup_test.sh)/dst_ip_list=(${cvm_ip_list[@]})/" ./setup_test.sh
 
 # Copy required files to server node root
 echo "Copying required files to server node root"
@@ -121,9 +132,9 @@ ssh "root@"$server_node_ip chmod +x ./setup_control_node.sh
 ##############################################################################
 # Edit setup_test.sh for server
 echo "Editing setup_test.sh for server"
-echo sed -i \''s/^'$(grep "^interface_list=" ./setup_test.sh)'/interface_list=('$(echo ${cvm_interface_list[@]})')/'\' ./setup_test.sh | sh
-echo sed -i \''s/^'$(grep "^src_ip_list=" ./setup_test.sh)'/src_ip_list=('$(echo ${cvm_ip_list[@]})')/'\' ./setup_test.sh | sh
-echo sed -i \''s/^'$(grep "^dst_ip_list=" ./setup_test.sh)'/dst_ip_list=('$(echo ${svm_ip_list[@]})')/'\' ./setup_test.sh | sh
+sed -i "s/^$(grep "^interface_list=" ./setup_test.sh)/interface_list=(${cvm_interface_list[@]})/" ./setup_test.sh
+sed -i "s/^$(grep "^src_ip_list=" ./setup_test.sh)/src_ip_list=(${cvm_ip_list[@]})/" ./setup_test.sh
+sed -i "s/^$(grep "^dst_ip_list=" ./setup_test.sh)/dst_ip_list=(${svm_ip_list[@]})/" ./setup_test.sh
 
 # Copy required files to server node root
 echo "Copying required files to server node root"
@@ -148,10 +159,10 @@ chmod +x ./setup_control_node.sh
 
 #Update ./run_netronome_test.sh
 echo "Update ./run_netronome_test.sh"
-echo sed -i \''s/^'$(grep "^CLIENT_NODE_IP=" ./run_netronome_test.sh)'/CLIENT_NODE_IP='$client_node_ip'/'\' ./run_netronome_test.sh | sh
-echo sed -i \''s/^'$(grep "^SERVER_NODE_IP=" ./run_netronome_test.sh)'/SERVER_NODE_IP='$server_node_ip'/'\' ./run_netronome_test.sh | sh
-echo sed -i \''s/^'$(grep "^SERVER_IP=" ./run_netronome_test.sh)'/SERVER_IP='$server_vm_ip'/'\' ./run_netronome_test.sh | sh
-echo sed -i \''s/^'$(grep "^CLIENT_IP=" ./run_netronome_test.sh)'/CLIENT_IP='$client_vm_ip'/'\' ./run_netronome_test.sh | sh
+sed -i "s/^$(grep "^CLIENT_NODE_IP=" ./run_netronome_test.sh)/CLIENT_NODE_IP=$client_node_ip/" ./run_netronome_test.sh
+sed -i "s/^$(grep "^SERVER_NODE_IP=" ./run_netronome_test.sh)/SERVER_NODE_IP=$server_node_ip/" ./run_netronome_test.sh
+sed -i "s/^$(grep "^SERVER_IP=" ./run_netronome_test.sh)/SERVER_IP=$server_vm_ip/" ./run_netronome_test.sh
+sed -i "s/^$(grep "^CLIENT_IP=" ./run_netronome_test.sh)/CLIENT_IP=$client_vm_ip/" ./run_netronome_test.sh
 
 # Give executable permissions to ./run_netronome_test.sh
 echo "Giving executable permissions to ./run_netronome_test.sh"
@@ -163,10 +174,10 @@ chmod +x ./run_netronome_test.sh
 # These scripts continue setting up the tests locally on the vm
 echo "Continuing setting up the tests locally on the vm"
 ssh "root@"$server_node_ip ssh "root@"$server_vm_ip chmod +x ./setup_test.sh
-ssh "root@"$client_vm_ip chmod +x ./setup_test.sh
+ssh "root@"$client_node_ip ssh "root@"$client_vm_ip chmod +x ./setup_test.sh
 
 ssh "root@"$server_node_ip ssh "root@"$server_vm_ip ./setup_test.sh &
-ssh "root@"$client_vm_ip ./setup_test.sh &
+ssh "root@"$client_node_ip ssh "root@"$client_vm_ip ./setup_test.sh &
 
 sleep 10
 echo "Setup complete"

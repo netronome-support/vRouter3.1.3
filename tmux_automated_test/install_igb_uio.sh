@@ -61,6 +61,7 @@ DRKO=$(find ~ -iname 'igb_uio.ko' | head -1 )
 echo "loading driver"
 modprobe $mp
 insmod $DRKO
+modprobe igb_uio
 echo "DPDK_DEVBIND: $DPDK_DEVBIND"
 for interface in ${interface_list[@]};
 do
