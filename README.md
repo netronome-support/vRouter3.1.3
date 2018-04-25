@@ -13,7 +13,12 @@
 ## On all nodes
 
 * Install Ubuntu 14.04.3/4 on all the nodes in the setup
-    
+
+* Download the following packages:
+     
+     1. contrail-install-packages_3.1.3.0-73-mitaka_all.deb
+     2. ns-agilio-vrouter-release_3.1.0.0-281.tgz
+
 ## On Controller node
 
 >**NOTE:** The following commands must be executed on the Controller node if not specifically stated otherwise.
@@ -47,7 +52,7 @@
 * Install Contrail packages on remaining nodes
 
       cd /opt/contrail/utils
-      fab install_pkg_all:/tmp/contrail-install-packages-x.x.x.x-xxx~openstack_version_all.deb
+      fab install_pkg_all:/<path to downloaded package>/contrail-install-packages-x.x.x.x-xxx~openstack_version_all.deb
          
 * Confirm installation of Contrail packages
 
@@ -92,10 +97,14 @@ reboot
         apt-get install nova-compute
         apt-get -f install -y
 
+* Extract Agilio-vRouter archive
+      
+      tar zxvf ns-agilio-vrouter-release_3.1.0.0-281.tgz
+
 * Install ns-agilio-vrouter-depends-packages
 
       cd /opt/contrail/utils
-      fab install_ns_agilio_nic:/tmp/ns-agilio-vrouter-depends-packages_x.x.x.x-xxx_amd64.deb
+      fab install_ns_agilio_nic:/<path to downloaded package>/ns-agilio-vrouter-depends-packages_x.x.x.x-xxx_amd64.deb
 
 * Confirm installation of vRouter packages
 
