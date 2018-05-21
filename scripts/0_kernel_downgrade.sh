@@ -9,7 +9,6 @@ if [[ "$kern" == "4.4.0-62-generic" ]]; then
 else
 	echo "Changing kernel to 4.4.0-62"
 fi
-read -p "wait"
 # Download and install kernel files
 echo "Downloading files"
 mkdir kernelfiles
