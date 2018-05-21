@@ -24,7 +24,7 @@ apt-get -y purge linux-headers-$kern linux-image-$kern
 # Delete downloaded files
 rm -r kernelfiles
 # Reboot
-read -p "Rebooting now..."
+echo "Rebooting now..."
 reboot
 
 
