@@ -20,7 +20,7 @@ echo "Removing existing kernel and cleaning up"
 # Get existing kernel version
 kern=$(uname -r)
 # Remove old kernel version
-apt-purge remove linux-headers-$kern linux-image-$kern
+apt-get -y purge linux-headers-$kern linux-image-$kern
 # Delete downloaded files
 rm -r kernelfiles
 # Reboot
