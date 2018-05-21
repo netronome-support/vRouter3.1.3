@@ -1,4 +1,5 @@
 #!/bin/bash
+# Script to install Agilio NFP drivers for vRouter4.1.1.
 # Install dependencies
 echo "Installing dependencies"
 apt-get -y install dkms python libjansson4 ethtool
