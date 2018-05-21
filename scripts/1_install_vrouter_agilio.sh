@@ -33,4 +33,6 @@ update-initramfs -u
 
 # Cleaning up
 echo "Cleaning lose ends"
-rm -r ./NFP
+cd ..
+cd ..
+rm -r NFP
