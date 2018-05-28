@@ -1,0 +1,160 @@
+{
+	"cluster": [{
+		"_comment": "========================================= CLUSTER ======================================== ",
+		"id": "lizard_spock",
+		"parameters": {
+			"domain": "netronome.com",
+			"subnet_mask": "255.255.252.0",
+			"gateway": "172.26.0.1",
+			"provision": {
+				"contrail_4": {
+					"docker_registry": "",
+					"docker_registry_insecure": true,
+					"controller_image": "",
+					"analytics_image": "",
+					"lb_image": "",
+					"analyticsdb_image": "",
+					"agent_image": "",
+					"enable_lbaas": false,
+					"tsn_mode": false,
+					"controller_config": {
+						"encap_priority": "VXLAN,MPLSoGRE,MPLSoUDP",
+						"external_routers_list": {},
+						"bgp_asn": "64512",
+						"flow_export_rate": "10"
+					},
+                                        "openstack_config": {
+                                             "management_ip": "40.0.0.1",
+                                             "ctrl-data_ip": "40.0.0.1"
+                                        },
+					"api_config": {
+						"log_level": "SYS_NOTICE",
+						"aaa_mode": "cloud-admin",
+						"cloud_admin_role": "admin",
+						"global_read_only_role": ""
+					}
+				},
+				"openstack": {
+					"region": "lizard_spock",
+					"multi_tenancy": true,
+					"openstack_manage_amqp": true,
+					"enable_ceilometer": false,
+					"keystone": {
+						"version": "v2.0",
+						"admin_password": "netronome",
+						"admin_user": "admin",
+						"admin_tenant": "admin",
+						"service_tenant": "services",
+						"auth_protocol": "http",
+						"mysql_service_password": "netronome",
+						"auth_port": 35357
+					},
+					"mysql": {
+						"root_password": "netronome",
+						"service_password": "netronome",
+						"allowed_hosts": ["127.0.0.1", "localhost", "lizard", "spock", "40.0.0.1", "40.0.0.2", "lizard.netronome.com", "spock.netronome.com"]
+					}
+				},
+				"kolla_globals": {
+					"enable_haproxy": "no",
+					"kolla_base_distro": "ubuntu",
+					"openstack_release": "4.1.0",
+					"network_interface": "nfp_p0"
+				},
+                                "ha": {     
+"contrail_internal_vip": "40.0.0.1"                            
+   } 
+			}
+		}
+	}],
+        "server": [{
+                "cluster_id": "lizard_spock",
+                "domain": "netronome.com",
+                "id": "lizard",
+                "network": {
+                        "interfaces": [{
+                                "default_gateway": "172.26.0.1",
+                                "ip_address": "172.26.1.133",
+                                "mac_address": "ac:1f:6b:17:ab:10",
+                                "name": "eno1"
+                        },
+                        {
+                                "ip_address": "40.0.0.1",
+                                "mac_address": "00:15:4d:12:2d:f0",
+                                "name": "nfp_p0"
+                        }],
+                        "management_interface": "eno1",
+                        "provisioning": "kickstart"
+                },
+                "parameters": {
+                        "provision": {
+                                "contrail": {
+                                        "kernel_upgrade": false,
+                                        "kernel_version": ""
+                                },
+                                "contrail_4": {
+                                        "ns_hw_acceleration" : true,
+                                        "ns_virtioforwarder_hugepages" : "8196"
+                                }
+                        }
+                },
+                "contrail": {
+                         "control_data_interface": "nfp_p0"
+                },
+                "password": "netronome",
+                "roles": [
+                        "openstack",
+                        "contrail-analytics",
+                        "contrail-controller",
+                        "contrail-analyticsdb",
+                        "contrail-compute"
+                ]
+        },
+        {
+                "cluster_id": "lizard_spock",
+                "domain": "netronome.com",
+                "id": "spock",
+                "network": {
+                        "interfaces": [{
+                                "default_gateway": "172.26.0.1",
+                                "ip_address": "172.26.1.134",
+                                "mac_address": "ac:1f:6b:17:ab:80",
+                                "name": "eno1"
+                        },
+                        {
+                                "ip_address": "40.0.0.2",
+                                "mac_address": "00:15:4d:12:2d:5c",
+                                "name": "nfp_p0"
+                        }],
+                        "management_interface": "eno1",
+                        "provisioning": "kickstart"
+                },
+                "parameters": {
+                        "provision": {
+                                "contrail": {
+                                        "kernel_upgrade": false,
+                                        "kernel_version": ""
+                                },
+                                "contrail_4": {
+                                        "ns_hw_acceleration" : true,
+                                        "ns_virtioforwarder_hugepages" : "8196"
+				}
+                        }
+                },
+                "contrail": {
+                         "control_data_interface": "nfp_p0"
+                },
+                "password": "netronome",
+                "roles": [
+                        "contrail-compute"
+                ]
+        }],
+
+	"image": [{
+		"category": "package",
+		"id": "ocata",
+		"path": "/root/contrail-cloud-docker_4.1.0.0-8-ocata_xenial.tgz",
+		"type": "contrail-ubuntu-package",
+		"version": "mainline"
+	}]
+}
