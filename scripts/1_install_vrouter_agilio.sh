@@ -8,14 +8,15 @@ BUILD_NAME="Netronome_R${CONTRAIL_VER}_build_${BUILD_VER}"
 # Download driver files
 echo "Downloading NFP drivers"
 mkdir NFP
-wget http://pahome.netronome.com/releases-intern/vrouter/builds/${BUILD_NAME}.tar -O NFP/${BUILD_NAME}.tar
+cd NFP
+wget http://pahome.netronome.com/releases-intern/vrouter/builds/${BUILD_NAME}.tar
 
 # Extract and install driver package
 echo "Installing driver"
-tar xvf NFP/${BUILD_NAME}.tar -C NFP/
+tar -xvf ${BUILD_NAME}.tar
 # Install dependencies
 echo "Installing depends"
-cd NFP/${BUILD_NAME}/repo_setup/debs/dependencies
+cd ${BUILD_NAME}/repo_setup/debs/dependencies
 dpkg -i *.deb
 apt-get install -y -f
 apt-get autoremove -y
@@ -25,7 +26,7 @@ cd ..
 dpkg -i agilio-nfp-driver-dkms_2018.04.13.0400.237fdbb_all.deb\
 	 ns-agilio-vrouter-udev_4.1.0.0-*.deb agilio-nic-firmware-2.0.7-1.deb\
 	 nfp-bsp-6000-b0_2018.04.13.1600-1_amd64.deb 
-apt-get install -f
+apt-get install -y -f
 dpkg -i agilio-nfp-driver-dkms_2018.04.13.0400.237fdbb_all.deb\
 	 ns-agilio-vrouter-udev_4.1.0.0-*.deb agilio-nic-firmware-2.0.7-1.deb\
 	 #nfp-bsp-6000-b0_2018.04.13.1600-1_amd64.deb 
