@@ -1,1 +1,0 @@
-glance --insecure image-create --name l2fwd-netronome --visibility public --container-format ovf --disk-format qcow2 --file DPDK-l2fwd-virtio.qcow2 
