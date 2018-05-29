@@ -1,6 +1,6 @@
 #!/bin/bash
 # Script to reflash the Arm firmware onto the NFP to enable vRouter offload
-#remove and reload NFP drivers with CPP access
+# Remove and reload NFP drivers with CPP access
 rmmod nfp
 modprobe nfp nfp_pf_netdev=0 nfp_dev_cpp=1
 #Reflash SmartNIC

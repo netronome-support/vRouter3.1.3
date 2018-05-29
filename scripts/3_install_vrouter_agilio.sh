@@ -4,7 +4,6 @@
 BUILD_VER=62
 CONTRAIL_VER=4.1
 BUILD_NAME="Netronome_R${CONTRAIL_VER}_build_${BUILD_VER}"
-
 # Download driver files
 echo "Downloading NFP drivers"
 mkdir NFP

@@ -10,7 +10,7 @@ dpkg -i contrail-server-manager-installer_4.1.0.0-8~xenial.deb
 
 # Start contrail setup and watch it's deployment
 echo "Starting contrail install"
-./opt/contrail/contrail_server_manager/setup.sh --all --smlite --hostip=172.26.1.53
+/opt/contrail/contrail_server_manager/setup.sh --all --smlite --hostip=172.26.1.53
 
 tail -f `find /var/log/contrail/install_logs | sort -r | head -1`
 # Restart contrail service
