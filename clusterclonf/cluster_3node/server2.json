@@ -1,0 +1,47 @@
+{
+       "server": [{
+                "cluster_id": "atari_apple",
+                "domain": "netronome.com",
+                "id": "apple",
+                "network": {
+                        "interfaces": [{
+                                "default_gateway": "172.26.0.1",
+                                "ip_address": "172.26.1.52",
+                                "mac_address": "0c:c4:7a:22:89:9c",
+                                "name": "enp3s0f0"
+                        },
+                        {
+                                "ip_address": "10.0.0.2",
+                                "mac_address": "00:15:4d:13:21:0e",
+                                "name": "nfp_p1"
+                        }
+                        ],
+                        "management_interface": "enp3s0f0",
+                        "provisioning": "kickstart"
+                },
+                "parameters": {
+                        "provision": {
+                                "contrail": {
+                                        "kernel_upgrade": false,
+                                        "kernel_version": ""
+                                },
+                                "contrail_4": {
+                                        "ns_hw_acceleration": true,
+                                        "ns_virtioforwarder_hugepages": "8196"
+                                }
+                        }
+                },
+                "contrail": {
+                        "control_data_interface" : "nfp_p1"
+                },
+                "password": "netronome",
+                "roles": [
+                        "openstack",
+                        "contrail-analytics",
+                        "contrail-controller",
+                        "contrail-analyticsdb",
+                        "contrail-compute"
+                ]
+        }
+        ]
+}

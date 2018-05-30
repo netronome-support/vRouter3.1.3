@@ -1,0 +1,9 @@
+{
+        "image": [{
+                "category": "package",
+                "id": "ocata",
+                "path": "/root/contrail-cloud-docker_4.1.0.0-8-ocata_xenial.tgz",
+                "type": "contrail-ubuntu-package",
+                "version": "mainline"
+        }]
+}

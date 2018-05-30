@@ -13,7 +13,7 @@
                         {
                                 "ip_address": "10.0.0.1",
                                 "mac_address": "00:15:4d:12:23:fc",
-                                "name": "ens5"
+                                "name": "nfp_p1"
                         }
                         ],
                         "management_interface": "enp3s0f0",
@@ -32,7 +32,7 @@
                         }
                 },
                 "contrail": {
-                        "control_data_interface" : "ens5"
+                        "control_data_interface" : "nfp_p1"
                 },
                 "password": "netronome",
                 "roles": [
