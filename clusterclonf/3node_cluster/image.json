@@ -1,0 +1,9 @@
+{
+        "image": [{
+                "category": "package",
+                "id": "ocata",
+                "path": "<docker_path>",
+                "type": "contrail-ubuntu-package",
+                "version": "mainline"
+        }]
+}

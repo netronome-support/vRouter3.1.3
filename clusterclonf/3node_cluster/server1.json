@@ -1,0 +1,47 @@
+{
+       "server": [{
+                "cluster_id": "<cl_nm>",
+                "domain": "<dm>",
+                "id": "<cntrl>",
+                "network": {
+                        "interfaces": [{
+                                "default_gateway": "<gway>",
+                                "ip_address": "<cntrl_ip>",
+                                "mac_address": "<mgmt_mac>",
+                                "name": "<mgmt_iface>"
+                        },
+                        {
+                                "ip_address": "<nfp_ip>",
+                                "mac_address": "<nfp_mac>",
+                                "name": "<nfp_iface>"
+                        }
+                        ],
+                        "management_interface": "<mgmt_iface>",
+                        "provisioning": "kickstart"
+                },
+                "parameters": {
+                        "provision": {
+                                "contrail": {
+                                        "kernel_upgrade": false,
+                                        "kernel_version": ""
+                                },
+                                "contrail_4": {
+                                        "ns_hw_acceleration": true,
+                                        "ns_virtioforwarder_hugepages": "8196"
+                                }
+                        }
+                },
+                "contrail": {
+                        "control_data_interface" : "<nfp_iface>"
+                },
+                "password": "netronome",
+                "roles": [
+                        "openstack",
+                        "contrail-analytics",
+                        "contrail-controller",
+                        "contrail-analyticsdb",
+                        "contrail-compute"
+                ]
+        }
+        ]
+}

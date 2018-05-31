@@ -1,0 +1,70 @@
+{
+"cluster" : [
+    {
+        "id": "<cl_nm>",
+        "parameters" : {
+            "domain": "<dm>",
+            "subnet_mask": "<msk>",
+            "gateway": "<gway>",
+            "provision": {
+                "contrail_4": {
+                                "docker_registry": "",
+                                "docker_registry_insecure": true,
+                                "controller_image": "",
+                                "analytics_image": "",
+                                "lb_image": "",
+                                "analyticsdb_image": "",
+                                "agent_image": "",
+                                "enable_lbaas": false,
+                                "tsn_mode": false,
+                                "controller_config": {
+                                        "encap_priority": "VXLAN,MPLSoGRE,MPLSoUDP",
+                                        "external_routers_list": {},
+                                        "bgp_asn": "64512",
+                                        "flow_export_rate": "10"
+                                },
+                                "openstack_config": {
+                                        "management_ip": "<ovc_ip>",
+                                        "ctrl-data_ip": "<ovc_ip>"
+                                },
+                                "api_config": {
+                                        "log_level": "SYS_NOTICE",
+                                        "aaa_mode": "cloud-admin",
+                                        "cloud_admin_role": "admin",
+                                        "global_read_only_role": ""
+                                }
+                },
+               "openstack":{
+                        "region": "<cl_nm>",
+                        "multi_tenancy": true,
+                        "openstack_manage_amqp": true,
+                        "enable_ceilometer": false,
+                        "keystone": {
+                                "version": "v2.0",
+                                "admin_password": "netronome",
+                                "admin_user": "admin",
+                                "admin_tenant": "admin",
+                                "service_tenant": "services",
+                                "auth_protocol": "http",
+                                "mysql_service_password": "netronome",
+                                "auth_port": 35357
+                        },
+                        "mysql": {
+                                "root_password": "netronome",
+                                "service_password": "netronome",
+                                "allowed_hosts": ["127.0.0.1", "localhost", "<cntrl>", "<cmp>", "<ovc_ip>", "<cmp_ip>", "<cntrl_dm>", "<cmp_dm>"]
+                        }
+                },
+                "kolla_globals": {
+                        "enable_haproxy": "no",
+                        "kolla_base_distro": "ubuntu",
+                        "openstack_release": "4.1.0",
+                        "network_interface": "nfp_p1"
+                },
+                "ha": {
+                        "contrail_internal_vip": "<ovc_ip>"
+                }
+                }
+                }
+   }]
+}
